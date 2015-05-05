@@ -4,6 +4,7 @@ ROOTDIR=$(git rev-parse --show-toplevel)
 count=0
 err_count=0
 
+echo "Analyzing commit history..."
 while git log HEAD~$count -n 1 --pretty="%B" &> /dev/null
 do
   git log HEAD~$count -n 1 --pretty="%B" \
@@ -14,3 +15,5 @@ done
 if [ $err_count -gt 0 ]; then
   exit 1
 fi
+echo "\nCommit history analyzed: no errors found"
+exit 0
